@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Гонки F1</title>
+
+    <link rel="stylesheet" href="css/vendor.min.css">
+    
+    <link rel="stylesheet" href="css/main.min.css">
+
+</head>
+<body>
+    <section class="main-page">        
+        <div class="main-window">
+            <h1 id="logo">Formula <span class="name">1</span></h1>
+            <div id="data-window">
+
+                <canvas id="main-canvas"></canvas>
+                <canvas id="analysis-canvas"></canvas>
+
+                <div id="main-control"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <script id="main" type="text/template">
+        <div class="main-menu" id="main-menu">
+            <button class="btn btn-info" type="button" id="btn-play">Play (one player)</button><br>
+            <button class="btn btn-info" type="button" id="btn-play2">Play (two players)</button><br>
+            <button class="btn btn-warning" type="button" id="btn-controls">Show Controls</button><br>
+            <button class="btn btn-warning" type="button" id="btn-results">Best Results</button><br>
+        </div>
+
+        <button class="btn btn-info" type="button" id="btn-back">Back</button>
+    </script>
+
+    <script id="controls" type="text/template">
+        <div class="main-menu">
+            <h2>Show Controls</h2>
+            <div class="info"><%= data %></div>
+            <br>
+            <button class="btn btn-info" type="button" id="btn-back2">Back</button>
+        </div>
+    </script>
+
+    <script id="results" type="text/template">
+        <div class="main-menu">
+            <h2>Best Results</h2>
+            <div class="info"><%= data %></div>
+            <br>
+            <button class="btn btn-info" type="button" id="btn-back3">Back</button>
+        </div>
+    </script>
+
+    <script src="scripts/vendor.min.js"></script>
+
+    <script src="scripts/main.min.js"></script>
+
+</body>
+</html>

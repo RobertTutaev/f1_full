@@ -1,0 +1,93 @@
+body
+    background-color: #000
+    overflow:  hidden
+
+h1
+    z-index: 200
+    position: absolute
+    color: red
+    text-align: center
+    font-weight: bold    
+    text-shadow: yellow 0 5px 5px
+    width: 500px
+    font-size: 80px
+    left: 50% 
+    margin-left: -250px
+    animation: move_logo ease-in-out 2s infinite
+
+    .name
+        color: MediumBlue
+        text-shadow: #0ff 1px 7px 5px
+
+.main-page
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: 20px
+
+.main-window    
+    box-shadow: 0 5px 30px -10px #000
+    overflow: hidden    
+
+#main-canvas
+    display: block
+    margin: 0 auto
+    z-index: 100
+
+.main-menu
+    z-index: 200    
+    position: absolute
+    top: 350px
+    left: 50%
+    width: 310px
+    margin-top: -100px
+    margin-left: -150px
+    background-color: yellow
+    opacity: 0.6
+    border-radius: 5px
+    
+    h2
+        text-align: center
+
+    button
+        font-size: 200%
+        width: 300px
+        margin: 5px
+
+.info
+    padding: 10px
+    font-color: red
+
+    table
+        width: 100%
+        border: 1px
+
+#btn-back
+    z-index: 300
+    position: absolute
+    top: 45px
+    left: 50%
+    margin-left: 410px
+    font-size: 30px
+    visibility: hidden
+
+#analysis-canvas
+    position: absolute
+    top: -9999px
+    left: -9999px
+
+@keyframes scale_main_control0
+    from
+        transform: scale(1) rotate(0)
+    to
+        transform: scale(0) rotate(720deg)
+
+@keyframes scale_main_control1
+    from
+        transform: scale(0) rotate(720deg)
+    to
+        transform: scale(1) rotate(0)
+
+@keyframes move_logo
+    50%
+       transform: translate(0, 5px) translateZ(0)
