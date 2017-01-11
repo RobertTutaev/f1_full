@@ -14,8 +14,8 @@ function getConfig(){
         //Слои для отрисовки местности
         stages: [
             {
-                urlXML: '../img/racing-pack/Spritesheets/spritesheet_tiles.xml',
-                urlIMG: '../img/racing-pack/Spritesheets/spritesheet_tiles.png',
+                urlXML: 'img/racing-pack/Spritesheets/spritesheet_tiles.xml',
+                urlIMG: 'img/racing-pack/Spritesheets/spritesheet_tiles.png',
                 map: [
                     [['land_grass11.png',0  ,0  ,0,1,1], ['land_grass11.png',127,0  ,0,1,1], ['land_grass11.png',254,0  ,0,1,1], ['land_grass01.png',381,0  ,0,1,1], ['land_grass09.png',508,0  ,0,1,1],  ['land_grass09.png',635,0  ,0,1,1], ['land_grass09.png',762,0  ,0,1,1],  ['land_grass02.png',889,0  ,0,1,1]],
                     [['land_grass01.png',0  ,127,0,1,1], ['land_grass09.png',127,127,0,1,1], ['land_grass09.png',254,127,0,1,1], ['land_grass10.png',381,127,0,1,1], ['land_grass12.png',508,127,0,1,1],  ['land_grass13.png',635,127,0,1,1], ['land_grass14.png',762,127,0,1,1],  ['land_grass03.png',889,127,0,1,1]],
@@ -27,8 +27,8 @@ function getConfig(){
             },
 
             {
-                urlXML: '../img/racing-pack/Spritesheets/spritesheet_objects.xml',
-                urlIMG: '../img/racing-pack/Spritesheets/spritesheet_objects.png',
+                urlXML: 'img/racing-pack/Spritesheets/spritesheet_objects.xml',
+                urlIMG: 'img/racing-pack/Spritesheets/spritesheet_objects.png',
                 map: [
                     [['skidmark_long_2.png' ,115,425,0.1  ,0.5,0.5]],
                     [['oil.png'             ,75 ,500,0    ,0.6,0.6], ['oil.png'         ,956,380,1.7  ,0.6,0.6]], 
@@ -45,8 +45,8 @@ function getConfig(){
         ],
         //машины
         cars: {
-            urlXML: '../img/racing-pack/Spritesheets/spritesheet_vehicles.xml',
-            urlIMG: '../img/racing-pack/Spritesheets/spritesheet_vehicles.png',
+            urlXML: 'img/racing-pack/Spritesheets/spritesheet_vehicles.xml',
+            urlIMG: 'img/racing-pack/Spritesheets/spritesheet_vehicles.png',
             defaultCar: 0,
             items: [
                 {

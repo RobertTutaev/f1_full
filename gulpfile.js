@@ -26,14 +26,23 @@ gulp.task('css', function () {
     .pipe(gulp.dest('app/css'));
 });
 
-//build
-gulp.task('build', function () {
-    return gulp.src(['app/*.html', 'app/img/racing-pack/Spritesheets/*.*'], { base: 'app' })
+//copy js, css, html
+gulp.task('build0', function () {
+    return gulp.src('app/*.html', { base: 'app' })
         .pipe(useref())
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', minifyCss()))
         .pipe(gulp.dest('public'));
 });
+
+//copy image
+gulp.task('build1', function () {
+    return gulp.src('app/img/racing-pack/Spritesheets/**/*', { base: 'app' })
+        .pipe(gulp.dest('public'));
+});
+
+//build
+gulp.task('build', ['build0', 'build1']);
 
 //watch
 gulp.task('watch', function () {
