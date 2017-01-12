@@ -6,6 +6,7 @@ function MainScene(cars) {
     var carContainer = new PIXI.Container();//PIXI container для машин
     var analysisScene;                      //сцена для анализа выезда машин на обочину или другие препятствия
     var introCar;                           //анимационный спрайт машины при начале гонки
+    var introText;                          //анимационный спрайт текста для вывода обратного отчета при начале гонки
 
     //Запускаем все!
     getAtlases(0);
@@ -58,39 +59,106 @@ function MainScene(cars) {
         //1. Удаляем старые спрайты машин и времени
         this.breakRace();
 
-        //2. Добавляем новые спрайты машин и времени в слой машин
-        //2.1 Эффект
+        //2. Добавляем новые спрайты машин и времени в слой машин, а также выводим эффекты при старте
+        //2.1 Эффект с обратным отчетом при старте
+        //2.1.1 Выводим 3
+        introText.text = '3';
         var temporaryObject = {
-            x: config['cars']['intro']['beginX'],
-            y: config['cars']['intro']['beginY'],
-            alpha: config['cars']['intro']['beginAlpha']
-        };
-        
+            alpha: 1
+        };        
         new TWEEN.Tween(temporaryObject)
             .to({
-                x: config['cars']['intro']['endX'],
-                y: config['cars']['intro']['endY'],
-                alpha: config['cars']['intro']['endAlpha']
-            }, 600)
+                alpha: 0
+            }, 1000)
             .onUpdate(function() {
-                introCar.position.x = this.x;
-                introCar.position.y = this.y;
-                introCar.alpha = this.alpha;
+                introText.alpha = this.alpha;
             })
             .onComplete(function(){
-                    introCar.position.x = config['cars']['intro']['beginX'];
-                    introCar.position.y = config['cars']['intro']['beginY'];
-                    introCar.alpha = 0;
-                    containerAddCarsAndTimes();
-                }) 
+
+                //2.1.2 Выводим 2
+                introText.text = '2';
+                var temporaryObject = {
+                    alpha: 1
+                };                
+                new TWEEN.Tween(temporaryObject)
+                    .to({
+                        alpha: 0
+                    }, 1000)
+                    .onUpdate(function() {
+                        introText.alpha = this.alpha;
+                    })
+                    .onComplete(function(){
+
+                        //2.1.3 Выводим 1
+                        introText.text = '1';
+                        var temporaryObject = {
+                            alpha: 1
+                        };                        
+                        new TWEEN.Tween(temporaryObject)
+                            .to({
+                                alpha: 0
+                            }, 1000)
+                            .onUpdate(function() {
+                                introText.alpha = this.alpha;
+                            })
+                            .onComplete(function(){
+
+                                //2.1.4 Выводим Go!
+                                introText.text = 'Go!';
+                                var temporaryObject = {
+                                    alpha: 1
+                                };                                
+                                new TWEEN.Tween(temporaryObject)
+                                    .to({
+                                        alpha: 0
+                                    }, 1000)
+                                    .onUpdate(function() {
+                                        introText.alpha = this.alpha;
+                                    })
+                                    .onComplete(function(){
+
+                                        //2.2 Эффект с машиной при старте
+                                        var temporaryObject2 = {
+                                            x: config['cars']['intro']['beginX'],
+                                            y: config['cars']['intro']['beginY'],
+                                            alpha: config['cars']['intro']['beginAlpha']
+                                        };
+                                        
+                                        new TWEEN.Tween(temporaryObject2)
+                                            .to({
+                                                x: config['cars']['intro']['endX'],
+                                                y: config['cars']['intro']['endY'],
+                                                alpha: config['cars']['intro']['endAlpha']
+                                            }, 300)
+                                            .onUpdate(function() {
+                                                introCar.position.x = this.x;
+                                                introCar.position.y = this.y;
+                                                introCar.alpha = this.alpha;
+                                            })
+                                            .onComplete(function(){
+                                                introCar.position.x = config['cars']['intro']['beginX'];
+                                                introCar.position.y = config['cars']['intro']['beginY'];
+                                                introCar.alpha = 0;
+
+                                                //2.3 Добавление спрайтов машин и текста при старте
+                                                containerAddCarsAndTimes();
+                                            })
+                                            .start();
+                                    }) 
+                                    .start();
+                            }) 
+                            .start();
+                    }) 
+                    .start();
+            }) 
             .start();
         
-        //2.2 Добавление спрайтов
+        // Добавление спрайтов
         function containerAddCarsAndTimes() {
             var sprite;
 
             cars.each(function(car){
-                sprite = new PIXI.Text('', {font:"40px Arial", fill:"Gold"});  //время
+                sprite = new PIXI.Text('', {font:"40px Arial", fill:"Gold"});   //время
                 sprite.position.y = 40 * timeSprites.length;
                 timeSprites.push(sprite);
                 carContainer.addChild(sprite);
@@ -125,11 +193,19 @@ function MainScene(cars) {
         var stage = new PIXI.Stage;
 
         for (var i = 0; i < config['stages'].length; i++) {
-            stage.addChild(containerAddChilds(config['stages'][i], atlases[i]));//добавляем слой
+            stage.addChild(containerAddChilds(config['stages'][i], atlases[i]));//добавляем по порядку слой местности
             if ( config['stagesNumber'] === i ) {
                 analysisScene = new AnalysisScene(stage);                       //задаем сцену для анализа выезда за пределы дороги
             }
         }
+                                                                                //создаем спрайт текста для вывода обратного отчета при начале гонки
+        introText = new PIXI.Text('', {font:"200px Arial", fill:"blue"});
+        introText.position.x = config['canvasWidth'] / 2;
+        introText.position.y = config['canvasHeight'] /2;
+        introText.alpha = 0;
+        introText.anchor.x = 0.5;
+        introText.anchor.y = 0.5;
+        carContainer.addChild(introText);
                                                                                 //создаем анимационную машину
         introCar = new PIXI.Sprite(atlases[config['stages'].length].getTexture(config['cars']['intro']['img']));
         introCar.position.x = config['cars']['intro']['beginX'];
@@ -139,6 +215,7 @@ function MainScene(cars) {
         introCar.anchor.x = 0.5;
         introCar.anchor.y = 0.5;
         carContainer.addChild(introCar);
+        
         stage.addChild(carContainer);                                           //Добавляем слой машин
 
         return stage;
