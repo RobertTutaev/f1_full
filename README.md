@@ -1,7 +1,7 @@
 # f1_full
 Project f1 (full)
 
-Простая игра "Formula 1"
+Игра "Formula 1"
 
 https://github.com/RobertTutaev/f1_full - полная версия проекта со всеми файлами;
 
