@@ -55,7 +55,7 @@ function MainScene(cars) {
     };
 
     //Старт гонки
-    this.beginRace = function() {
+    this.beginRace = function(callback, options) {
         //1. Удаляем старые спрайты машин и времени
         this.breakRace();
 
@@ -118,13 +118,12 @@ function MainScene(cars) {
                                     .onComplete(function(){
 
                                         //2.2 Эффект с машиной при старте
-                                        var temporaryObject2 = {
+                                        var temporaryObject = {
                                             x: config['cars']['intro']['beginX'],
                                             y: config['cars']['intro']['beginY'],
                                             alpha: config['cars']['intro']['beginAlpha']
-                                        };
-                                        
-                                        new TWEEN.Tween(temporaryObject2)
+                                        };                                        
+                                        new TWEEN.Tween(temporaryObject)
                                             .to({
                                                 x: config['cars']['intro']['endX'],
                                                 y: config['cars']['intro']['endY'],
@@ -142,6 +141,9 @@ function MainScene(cars) {
 
                                                 //2.3 Добавление спрайтов машин и текста при старте
                                                 containerAddCarsAndTimes();
+
+                                                //2.4 Показываем кнопку "Назад"
+                                                callback(options);
                                             })
                                             .start();
                                     }) 
@@ -274,8 +276,7 @@ function MainScene(cars) {
                                 width: carsSprites[i].width,
                                 height: carsSprites[i].height,
                                 alpha: 1
-                            };
-                            
+                            };                            
                             new TWEEN.Tween(temporaryObject)
                                 .to({
                                     width: temporaryObject.width * 3,
@@ -292,7 +293,7 @@ function MainScene(cars) {
                                     if ( cars.countCarsInRace() === 0 ) {
 
                                         var k = cars.getFastestCarNumber();
-                                        var temporaryObject2 = {
+                                        var temporaryObject = {
                                             n: k,
                                             x: timeSprites[k].position.x,
                                             y: timeSprites[k].position.y,
@@ -301,13 +302,12 @@ function MainScene(cars) {
                                             anchorX: 0,
                                             anchorY: 0
                                         };
-                                        
-                                        new TWEEN.Tween(temporaryObject2)
+                                        new TWEEN.Tween(temporaryObject)
                                             .to({
                                                 x: config['canvasWidth'] / 2,
                                                 y: config['canvasHeight'] /2,
-                                                width: temporaryObject2.width * 3,
-                                                height: temporaryObject2.height * 3,
+                                                width: temporaryObject.width * 3,
+                                                height: temporaryObject.height * 3,
                                                 anchorX: 0.5,
                                                 anchorY: 0.5,
                                             }, 500)
@@ -331,7 +331,7 @@ function MainScene(cars) {
             } else {
                 endTime = cars.at(i).get('endTime');
             }
-            timeSprites[i].text = cars.at(i).get('name') + ': ' + ( ( endTime - cars.at(i).get('beginTime') ) / 1000 ) + 's';            
+            timeSprites[i].text = cars.at(i).get('name') + ': ' + ( ( endTime - cars.at(i).get('beginTime') ) / 1000 ) + 's';
         };
     };
 };

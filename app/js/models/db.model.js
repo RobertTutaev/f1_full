@@ -39,12 +39,14 @@ function DB() {
     tables.add(config['db']['tables']);
 
     // Получение результатов заездов
-    this.selectValues = function(tableName, arrayValues, callback) {        
+    this.selectValues = function(tableName, arrayValues, callback, options) {        
         db.transaction(function(tx) {
             tx.executeSql(
                 tables.findWhere({name: tableName}).get('selectSQL'),
-                arrayValues, 
-                callback, 
+                arrayValues,
+                function(tx, data) {
+                    callback(data, options);
+                },
                 function (tx, error) {
                     console.log("Query Error: " + error.message);
                 }

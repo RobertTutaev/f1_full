@@ -26,8 +26,8 @@ function getMainView() {
         console.log("DB Error: " + err.message);
       }
 
-      _.bindAll(this, 'on_keypress');
-      $(document).bind('keypress', this.on_keypress);
+      _.bindAll(this, 'on_keydown');
+      $(document).bind('keydown', this.on_keydown);
       this.listenTo( this.collection, "change:endTime", this.onChangeEndTime );
 
       this.render();
@@ -41,21 +41,25 @@ function getMainView() {
     //Запуск игры (1 игрок)
     play: function() {
       $(this.$el).find('#main-menu').css({'animation': 'scale_main_control0 1s forwards'});
-      $(this.$el).find('#btn-back').css({'visibility': 'visible'});
       $(this.$el).find('#btn-play').trigger('blur');
 
       this.collection.setCarsInRace(1);
-      this.scene.beginRace();
+      this.scene.beginRace(function(scope){
+          $(scope.$el).find('#btn-back').css({'visibility': 'visible'});      
+        }, 
+        this);
     },
 
     //Запуск игры (2 игрока)
     play2: function() {
       $(this.$el).find('#main-menu').css({'animation': 'scale_main_control0 1s forwards'});
-      $(this.$el).find('#btn-back').css({'visibility': 'visible'});
       $(this.$el).find('#btn-play').trigger('blur');
 
       this.collection.setCarsInRace(2);
-      this.scene.beginRace();
+      this.scene.beginRace(function(scope){
+          $(scope.$el).find('#btn-back').css({'visibility': 'visible'});      
+        }, 
+        this);
     },
 
     //Прерывание игры
@@ -82,7 +86,7 @@ function getMainView() {
         for (var i = 0; i < config['cars']['items'].length; i++) {
           result = result + '<ul> Car: <b>' + config['cars']['items'][i]['name'] + '</b>';          
           for (key in config['cars']['items'][i]['controlKeys']) {
-            result = result +'<li><b>"' + key + '"</b> - ' + config['cars']['items'][i]['controlKeys'][key] + '</li>';
+            result = result +'<li><b>"' + String.fromCharCode(key) + '"</b> - ' + config['cars']['items'][i]['controlKeys'][key] + '</li>';
           }          
           result = result + '</ul>';
         }
@@ -96,18 +100,15 @@ function getMainView() {
     //Показываем результаты заездов
     results: function() {
 
-      //Сохраняем Scope
-      var scope = this;
-
       //Получаем рейтинг победителей
       try {
         
         this.db.selectValues(
           'results', 
           [],
-          function(tx, data) {
+          function(data, scope) {
             var result = '<table><tr><th>№</th><th>Car</th><th>Time (s)</th><th>Сhronology</th></tr>';
-            
+
             for(var i = 0; i < data.rows.length; i++) {
               result = result + 
                 '<tr>' +
@@ -121,7 +122,8 @@ function getMainView() {
             
             scope.template = template('results');
             scope.render(result);
-          }
+          },
+          this
         );
 
       } catch (err) {
@@ -130,28 +132,12 @@ function getMainView() {
     },
     
     //Обработка нажатия клавиш управления машиной
-    on_keypress: function(e) {
-
-      var char = getChar(e);
+    on_keydown: function(e) {
       var cars = this.collection.carsInRace();
-
+      
       cars.each(function(car){
-        car.controlCar(char);
+        car.controlCar(e.keyCode || e.charCode);
       });
-
-      function getChar(event) {
-        if (event.which == null) {                    // IE
-          if (event.keyCode < 32) return null;        // спец. символ
-          return String.fromCharCode(event.keyCode)
-        }
-
-        if (event.which != 0 && event.charCode != 0) {// все кроме IE
-          if (event.which < 32) return null;          // спец. символ
-          return String.fromCharCode(event.which);    // остальные
-        }
-
-        return null;                                  // спец. символ
-      }
     },
 
     //Слушаем завершение гонок
@@ -163,10 +149,6 @@ function getMainView() {
           console.log("DB Error: " + err.message);
         }        
       }
-
-      if ( this.collection.countCarsInRace() === 0 ) {
-        //alert('The end');
-      };
     }
   });
 
