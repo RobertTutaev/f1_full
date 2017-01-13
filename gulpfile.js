@@ -26,18 +26,18 @@ gulp.task('css', function () {
     .pipe(gulp.dest('app/css'));
 });
 
-//copy js, css, html, ico
+//copy js, css, html
 gulp.task('build0', function () {
-    return gulp.src(['app/*.html', 'app/favicon.ico'], { base: 'app' })
+    return gulp.src('app/*.html', { base: 'app' })
         .pipe(useref())
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', minifyCss()))
         .pipe(gulp.dest('public'));
 });
 
-//copy image
+//copy image, ico
 gulp.task('build1', function () {
-    return gulp.src('app/img/racing-pack/Spritesheets/**/*', { base: 'app' })
+    return gulp.src(['app/img/racing-pack/Spritesheets/**/*', 'app/favicon.ico'], { base: 'app' })
         .pipe(gulp.dest('public'));
 });
 
