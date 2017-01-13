@@ -30,15 +30,15 @@ function getConfig(){
                 urlXML: 'img/racing-pack/Spritesheets/spritesheet_objects.xml',
                 urlIMG: 'img/racing-pack/Spritesheets/spritesheet_objects.png',
                 map: [
-                    [['skidmark_long_2.png' ,115,425,0.1  ,0.5,0.5]],
-                    [['oil.png'             ,75 ,500,0    ,0.6,0.6], ['oil.png'         ,956,380,1.7  ,0.6,0.6]], 
-                    [['rock2.png'           ,130,120,0    ,1  ,1  ], ['rock1.png'       ,390,320,0    ,1  ,1  ], ['rock3.png'      ,920,0  ,0.1 ,1   ,1  ], ['rock2.png'      ,944,34 ,0    ,1  ,1  ], ['rock2.png'           ,50 ,675,1  ,1  ,1  ]],
+                    [['arrow_white.png'     ,112,440,0    ,0.2,0.2], ['arrow_white.png' ,405,239,1.57 ,0.2,0.2], ['arrow_white.png',907,320,-3.14,0.2,0.2], ['arrow_white.png' ,620,526,-1.57,0.2,0.2]],
+                    [['skidmark_long_2.png' ,105,505,0.1  ,0.5,0.5]],
+                    [['oil.png'             ,75 ,580,0    ,0.6,0.6], ['oil.png'         ,956,380,1.7  ,0.6,0.6]], 
+                    [['rock2.png'           ,130,120,0    ,1  ,1  ], ['rock1.png'       ,390,320,0    ,1  ,1  ], ['rock3.png'      ,920,0  ,0.1 ,1   ,1  ], ['rock2.png'       ,944,34 ,0    ,1  ,1  ], ['rock2.png'           ,50 ,675,1  ,1  ,1  ]],
                     [['barrier_red_race.png',590,370,-0.05,1  ,1  ], ['barrier_red.png' ,710,590,-0.02,1  ,1  ]],
                     [['tent_blue.png'       ,640,225,-0.1 ,1  ,1  ]],
-                    [['barrel_red_down.png' ,340,60 ,0.1  ,1  ,1  ], ['barrel_red.png'  ,280,60 ,0    ,1  ,1  ], ['barrel_red.png' ,305,5  ,0   ,1   ,1  ], ['barrel_blue.png',365,7  ,0    ,1  ,1  ], ['barrel_blue_down.png',85 ,707,0.1,1  ,1  ], ['barrel_blue.png',155 ,707,0  ,1  ,1  ]],
-                    [['tree_small.png'      ,0  ,50 ,0    ,1  ,1  ], ['tree_small.png'  ,130,5  ,0    ,1  ,1  ], ['tree_small.png' ,300,420,0   ,1   ,1  ], ['tree_small.png' ,870,623,0    ,1  ,1  ], ['tree_small.png'      ,641,559,0.7,1  ,1  ]],
+                    [['barrel_red_down.png' ,340,60 ,0.1  ,1  ,1  ], ['barrel_red.png'  ,280,60 ,0    ,1  ,1  ], ['barrel_red.png' ,305,5  ,0   ,1   ,1  ], ['barrel_blue.png' ,365,7  ,0    ,1  ,1  ], ['barrel_blue_down.png',85 ,707,0.1,1  ,1  ], ['barrel_blue.png',155 ,707,0  ,1  ,1  ]],
+                    [['tree_small.png'      ,0  ,50 ,0    ,1  ,1  ], ['tree_small.png'  ,130,5  ,0    ,1  ,1  ], ['tree_small.png' ,300,420,0   ,1   ,1  ], ['tree_small.png'  ,870,623,0    ,1  ,1  ], ['tree_small.png'      ,641,559,0.7,1  ,1  ]],
                     [['tree_large.png'      ,207,314,0.1  ,1  ,1  ]],
-                    [['arrow_white.png'     ,112,380,0    ,0.2,0.2], ['arrow_white.png' ,907,320,-3.14,0.2,0.2]],
                     [['barrier_white.png'   ,385,705,-1.59,.64,0.2]]
                 ],
             }
