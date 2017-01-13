@@ -78,11 +78,6 @@ h1 {
   font-size: 30px;
   visibility: hidden; }
 
-#analysis-canvas {
-  position: absolute;
-  top: -9999px;
-  left: -9999px; }
-
 @-webkit-keyframes scale_main_control0 {
   from {
     -webkit-transform: scale(1) rotate(0);

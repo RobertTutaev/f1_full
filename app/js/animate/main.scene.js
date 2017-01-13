@@ -103,8 +103,8 @@ function MainScene(cars) {
                             })
                             .onComplete(function(){
 
-                                //2.1.4 Выводим Go!
-                                introText.text = 'Go!';
+                                //2.1.4 Выводим Go!!!
+                                introText.text = 'Go!!!';
                                 var temporaryObject = {
                                     alpha: 1
                                 };                                
@@ -201,7 +201,7 @@ function MainScene(cars) {
             }
         }
                                                                                 //создаем спрайт текста для вывода обратного отчета при начале гонки
-        introText = new PIXI.Text('', {font:"200px Arial", fill:"blue"});
+        introText = new PIXI.Text('', {font:"200px Arial", fill:"MidnightBlue"});
         introText.position.x = config['canvasWidth'] / 2;
         introText.position.y = config['canvasHeight'] /2;
         introText.alpha = 0;

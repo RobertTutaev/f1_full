@@ -1,16 +1,10 @@
 function AnalysisScene(stage) {
-    var renderElement = $(config['canvasAnalysisEl'])[0];   //Где отрисовываем
-    var context = renderElement.getContext('2d');           //Получаем контекст для анализа столкновения с бордюрами дороги
 
-    //Рисуем сцену
-    show();
+    var canvas = document.createElement('canvas');
+    var context =  canvas.getContext("2d");
+    var renderer = new PIXI.CanvasRenderer(config['canvasWidth'], config['canvasHeight'], {view: canvas});
 
-    function show(){        
-        var renderer = new PIXI.CanvasRenderer(config['canvasWidth'], config['canvasHeight'], {view: renderElement});
-        document.body.appendChild(renderer.view);
-
-        renderer.render(stage); //рисуем
-    }
+    renderer.render(stage); //рисуем сцену для анализа
 
     //Анализ движения машины
     this.analysis = function(carModel, carSprite) {
