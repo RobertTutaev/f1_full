@@ -28,7 +28,7 @@ gulp.task('css', function () {
 
 //copy js, css, html, ico
 gulp.task('build0', function () {
-    return gulp.src(['[app/*.html', 'app/favicon.ico'], { base: 'app' })
+    return gulp.src(['app/*.html', 'app/favicon.ico'], { base: 'app' })
         .pipe(useref())
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', minifyCss()))
