@@ -67,6 +67,7 @@ function getMainView() {
       $(this.$el).find('#main-menu').css({'animation': 'scale_main_control1 1s forwards'});
       $('#btn-back').css({'visibility': 'hidden'});
       $(this.$el).find('#btn-play').trigger('focus');
+
       this.scene.breakRace();
     },
 
@@ -83,7 +84,7 @@ function getMainView() {
       function getData() {
         var result = '';
         
-        for (var i = 0; i < config['cars']['items'].length; i++) {
+        for (var i = 0, n = config['cars']['items'].length; i < n; i++) {
           result = result + '<ul> Car: <b>' + config['cars']['items'][i]['name'] + '</b>';          
           for (key in config['cars']['items'][i]['controlKeys']) {
             result = result +'<li><b>"' + String.fromCharCode(key) + '"</b> - ' + config['cars']['items'][i]['controlKeys'][key] + '</li>';
@@ -109,7 +110,7 @@ function getMainView() {
           function(data, scope) {
             var result = '<table><tr><th>№</th><th>Car</th><th>Time (s)</th><th>Сhronology</th></tr>';
 
-            for(var i = 0; i < data.rows.length; i++) {
+            for(var i = 0, n = data.rows.length; i < n; i++) {
               result = result + 
                 '<tr>' +
                   '<td>' + (i + 1) + '</td>' + 

@@ -181,7 +181,7 @@ function MainScene(cars) {
 
     //Прерываение гонки (удаляем старые спрайты машин и времени)
     this.breakRace = function() {
-        for (var i = 0; i < carsSprites.length; i++) {
+        for (var i = 0, n = carsSprites.length; i < n; i++) {
             carContainer.removeChild(carsSprites[i]);
             carContainer.removeChild(timeSprites[i]);
         }
@@ -194,7 +194,7 @@ function MainScene(cars) {
     function getPIXIStage(){
         var stage = new PIXI.Stage;
 
-        for (var i = 0; i < config['stages'].length; i++) {
+        for (var i = 0, n = config['stages'].length; i < n; i++) {
             stage.addChild(containerAddChilds(config['stages'][i], atlases[i]));//добавляем по порядку слой местности
             if ( config['stagesNumber'] === i ) {
                 analysisScene = new AnalysisScene(stage);                       //задаем сцену для анализа выезда за пределы дороги
@@ -227,8 +227,8 @@ function MainScene(cars) {
             var container = new PIXI.Container();
             var sprite;
 
-            for (var y = 0; y < config['map'].length; y++) {
-                for (var x = 0; x < config['map'][y].length; x++) {
+            for (var y = 0, n = config['map'].length; y < n; y++) {
+                for (var x = 0, m = config['map'][y].length; x < m; x++) {
                     sprite = new PIXI.Sprite(atlas.getTexture(config['map'][y][x][0]));
                     sprite.position.x = config['map'][y][x][1];
                     sprite.position.y = config['map'][y][x][2];
@@ -247,7 +247,7 @@ function MainScene(cars) {
     function carsMovement() {
         var carModel, endTime, countCheckPoints;
 
-        for(var i = 0; i < carsSprites.length; i++) {
+        for(var i = 0, n = carsSprites.length; i < n; i++) {
             carsSprites[i].rotation = cars.at(i).get('imgRotation') + cars.at(i).get('rotation');
             
             //Анализируем заезд на обочину

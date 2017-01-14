@@ -48,7 +48,7 @@ function Atlas( urlXML, urlIMG, callback ) {
                 var XMLDoc = httpRequest.responseXML;
                 var els = XMLDoc.getElementsByTagName("SubTexture");
                 
-                for (var i = 0; i < els.length; i++) {
+                for (var i = 0, n = els.length; i < n; i++) {
                     atlasValues[els[i].getAttribute("name")] = {
                         'x':parseInt(els[i].getAttribute("x")), 
                         'y':parseInt(els[i].getAttribute("y")), 
