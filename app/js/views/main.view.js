@@ -28,7 +28,7 @@ function getMainView() {
 
       _.bindAll(this, 'on_keydown');
       $(document).bind('keydown', this.on_keydown);
-      this.listenTo( this.collection, "change:endTime", this.onChangeEndTime );
+      this.listenTo( this.collection, 'change:endTime', this.onChangeEndTime );
 
       this.render();
     },
@@ -65,7 +65,7 @@ function getMainView() {
     //Прерывание игры
     back: function() {
       $(this.$el).find('#main-menu').css({'animation': 'scale_main_control1 1s forwards'});
-      $('#btn-back').css({'visibility': 'hidden'});
+      $(this.$el).find('#btn-back').css({'visibility': 'hidden'});
       $(this.$el).find('#btn-play').trigger('focus');
 
       this.scene.breakRace();
