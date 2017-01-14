@@ -7,13 +7,15 @@ function MainScene(cars) {
     var analysisScene;                      //сцена для анализа выезда машин на обочину или другие препятствия
     var introCar;                           //анимационный спрайт машины при начале гонки
     var introText;                          //анимационный спрайт текста для вывода обратного отчета при начале гонки
+    var showingNowBestTime = false;         //переменная (метка) для уведомления о выполнении (в текущий момент) 
+                                            //анимации текстового спрайта с лучшим результатом заезда по завершению заезда
 
     //Запускаем все!
     getAtlases(0);
 
     //1. Инициаллизируем атласы
     function getAtlases(n) {
-        if ( n < config['stages'].length ) {            
+        if ( n < config['stages'].length ) {
             atlases.push(new Atlas(
                 config['stages'][n]['urlXML'],
                 config['stages'][n]['urlIMG'],
@@ -65,7 +67,7 @@ function MainScene(cars) {
         introText.text = '3';
         var temporaryObject = {
             alpha: 1
-        };        
+        };
         new TWEEN.Tween(temporaryObject)
             .to({
                 alpha: 0
@@ -79,7 +81,7 @@ function MainScene(cars) {
                 introText.text = '2';
                 var temporaryObject = {
                     alpha: 1
-                };                
+                };
                 new TWEEN.Tween(temporaryObject)
                     .to({
                         alpha: 0
@@ -93,7 +95,7 @@ function MainScene(cars) {
                         introText.text = '1';
                         var temporaryObject = {
                             alpha: 1
-                        };                        
+                        };
                         new TWEEN.Tween(temporaryObject)
                             .to({
                                 alpha: 0
@@ -107,7 +109,7 @@ function MainScene(cars) {
                                 introText.text = 'Go!!!';
                                 var temporaryObject = {
                                     alpha: 1
-                                };                                
+                                };
                                 new TWEEN.Tween(temporaryObject)
                                     .to({
                                         alpha: 0
@@ -122,7 +124,7 @@ function MainScene(cars) {
                                             x: config['cars']['intro']['beginX'],
                                             y: config['cars']['intro']['beginY'],
                                             alpha: config['cars']['intro']['beginAlpha']
-                                        };                                        
+                                        };                           
                                         new TWEEN.Tween(temporaryObject)
                                             .to({
                                                 x: config['cars']['intro']['endX'],
@@ -146,13 +148,13 @@ function MainScene(cars) {
                                                 callback(options);
                                             })
                                             .start();
-                                    }) 
+                                    })
                                     .start();
-                            }) 
+                            })
                             .start();
-                    }) 
+                    })
                     .start();
-            }) 
+            })
             .start();
         
         // Добавление спрайтов
@@ -191,7 +193,7 @@ function MainScene(cars) {
 
     // Вспомогательные операции ====================================================================================================
     // Получаем всю сцену целиком
-    function getPIXIStage(){
+    function getPIXIStage() {
         var stage = new PIXI.Stage;
 
         for (var i = 0, n = config['stages'].length; i < n; i++) {
@@ -261,7 +263,7 @@ function MainScene(cars) {
             if ( cars.at(i).get('endTime') === 0 ){
                 //Анализ наезда на "чекпоинт"
                 if (
-                    config['roadCheckPoints'][cars.at(i).get('checkPointNumber')][0] < carsSprites[i].position.x && 
+                    config['roadCheckPoints'][cars.at(i).get('checkPointNumber')][0] < carsSprites[i].position.x &&
                     config['roadCheckPoints'][cars.at(i).get('checkPointNumber')][2] > carsSprites[i].position.x &&
                     config['roadCheckPoints'][cars.at(i).get('checkPointNumber')][1] < carsSprites[i].position.y &&
                     config['roadCheckPoints'][cars.at(i).get('checkPointNumber')][3] > carsSprites[i].position.y) {
@@ -276,11 +278,11 @@ function MainScene(cars) {
                                 width: carsSprites[i].width,
                                 height: carsSprites[i].height,
                                 alpha: 1
-                            };                            
+                            };
                             new TWEEN.Tween(temporaryObject)
                                 .to({
                                     width: temporaryObject.width * 3,
-                                    height: temporaryObject.height * 3, 
+                                    height: temporaryObject.height * 3,
                                     alpha: 0
                                 }, 500)
                                 .onUpdate(function() {
@@ -290,8 +292,9 @@ function MainScene(cars) {
                                 })
                                 .onComplete(function() {
                                     //Если гонка завершена
-                                    if ( cars.countCarsInRace() === 0 ) {
-
+                                    if ( cars.countCarsInRace() === 0 && !showingNowBestTime ) {
+                                        
+                                        showingNowBestTime = true;                  //сообщаем, что анимация началась
                                         var k = cars.getFastestCarNumber();
                                         var temporaryObject = {
                                             n: k,
@@ -305,7 +308,7 @@ function MainScene(cars) {
                                         new TWEEN.Tween(temporaryObject)
                                             .to({
                                                 x: config['canvasWidth'] / 2,
-                                                y: config['canvasHeight'] /2,
+                                                y: config['canvasHeight'] / 2,
                                                 width: temporaryObject.width * 3,
                                                 height: temporaryObject.height * 3,
                                                 anchorX: 0.5,
@@ -319,8 +322,11 @@ function MainScene(cars) {
                                                 timeSprites[k].anchor.x = this.anchorX;
                                                 timeSprites[k].anchor.y = this.anchorY;
                                             })
+                                            .onComplete(function() {
+                                                showingNowBestTime = false;         //сообщаем, что анимация завершилась
+                                            })
                                             .start();
-                                    };
+                                    }
                                 })
                                 .start();
                         } else {

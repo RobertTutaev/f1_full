@@ -1,10 +1,10 @@
 function AnalysisScene(stage) {
 
     var canvas = document.createElement('canvas');
-    var context =  canvas.getContext("2d");
+    var context =  canvas.getContext('2d');
     var renderer = new PIXI.CanvasRenderer(config['canvasWidth'], config['canvasHeight'], {view: canvas});
 
-    renderer.render(stage); //рисуем сцену для анализа
+    renderer.render(stage); //рисуем сцену для анализа заезда на обочину
 
     //Анализ движения машины
     this.analysis = function(carModel, carSprite) {
@@ -17,7 +17,7 @@ function AnalysisScene(stage) {
                 incrementY
             ).data;
 
-        //Если бордюр, то останавливаем машину
+        //Если обочина, то останавливаем машину
         for (var j = 0, n = pix.length; j < n; j += 4) {
             if ( pix[j] === config['roadEndColor'][0] && pix[j + 1] === config['roadEndColor'][1] && pix[j + 2] === config['roadEndColor'][2] ) {
                 
@@ -29,7 +29,7 @@ function AnalysisScene(stage) {
         //Если граница сцены, то останавливаем машину
         var newX = carSprite.position.x + incrementX;
         var newY = carSprite.position.y + incrementY;
-        
+
         if ( newX < 0 || newX > config['canvasWidth'] || newY < 0 || newY > config['canvasHeight'] ) {
 
             carModel.stop();

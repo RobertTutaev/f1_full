@@ -41,6 +41,18 @@ function getConfig(){
                     [['tree_large.png'      ,207,314,0.1  ,1  ,1  ]],
                     [['barrier_white.png'   ,385,705,-1.59,.64,0.2]]
                 ],
+            },
+
+            {
+                urlXML: 'img/racing-pack/Spritesheets/spritesheet_characters.xml',
+                urlIMG: 'img/racing-pack/Spritesheets/spritesheet_characters.png',
+                map: [
+                    [['character_black_red.png'  ,600,730,3.00 ,0.7,0.7]], 
+                    [['character_black_white.png',860,700,2.70 ,0.7,0.7], ['character_black_white.png',460,390,-0.34,0.7,0.7]],
+                    [['character_brown_blue.png' ,830,680,3.00 ,0.7,0.7], ['character_brown_blue.png' ,500,380,-0.34,0.7,0.7]],
+                    [['character_black_green.png',750,720,3.40 ,0.7,0.7]],
+                    [['character_blonde_blue.png',780,690,3.04 ,0.7,0.7], ['character_blonde_blue.png',280,130,0.34 ,0.7,0.7]]
+                ],
             }
         ],
         //машины
@@ -87,14 +99,14 @@ function getConfig(){
             ],
             //демо - машина при старте
             intro: {
-                img: 'car_green_1.png',
+                img: 'car_yellow_1.png',
                 imgRotation: 1.57,
                 beginAlpha: 1,
                 beginX: 1016,
                 beginY: 381,
                 endX: 0,
                 endY: 381,
-                endAlpha: 0
+                endAlpha: 0.2
             }
         },
         //Цвет бордюра дороги за который машины не должны выезжать

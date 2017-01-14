@@ -3,9 +3,9 @@ function DB() {
 
     //cоединение с БД
     var db = openDatabase(
-            config['db']['name'], 
-            config['db']['version'], 
-            config['db']['label'], 
+            config['db']['name'],
+            config['db']['version'],
+            config['db']['label'],
             config['db']['size']);
    
     //коллекция таблиц
@@ -39,7 +39,7 @@ function DB() {
     tables.add(config['db']['tables']);
 
     // Получение результатов заездов
-    this.selectValues = function(tableName, arrayValues, callback, options) {        
+    this.selectValues = function(tableName, arrayValues, callback, options) {
         db.transaction(function(tx) {
             tx.executeSql(
                 tables.findWhere({name: tableName}).get('selectSQL'),
@@ -54,8 +54,8 @@ function DB() {
         });
     };
 
-    // Добавление результата заезда 
-    this.insertValues = function(tableName, arrayValues) {        
+    // Добавление результата заезда
+    this.insertValues = function(tableName, arrayValues) {       
         db.transaction(function(tx) {
             tx.executeSql(
                 tables.findWhere({name: tableName}).get('insertSQL'),
