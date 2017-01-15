@@ -46,7 +46,7 @@ function getMainView() {
       this.collection.setCarsInRace(1);
       this.scene.beginRace(function(scope){
           $(scope.$el).find('#btn-back').css({'visibility': 'visible'});      
-        }, 
+        },
         this);
     },
 
