@@ -33,8 +33,8 @@ function getMainView() {
       this.render();
     },
 
-    render: function(value){
-      this.$el.html(this.template({ data: value }));
+    render: function(values){
+      this.$el.html(this.template(values));
       return this;
     },
 
@@ -79,23 +79,8 @@ function getMainView() {
 
     //Показываем кнопки управления
     controls: function() {
-
-      //Получаем кнопки управления 
-      function getData() {
-        var result = '';
-        
-        for (var i = 0, n = config['cars']['items'].length; i < n; i++) {
-          result = result + '<ul> Car: <b>' + config['cars']['items'][i]['name'] + '</b>';          
-          for (key in config['cars']['items'][i]['controlKeys']) {
-            result = result +'<li><b>"' + String.fromCharCode(key) + '"</b> - ' + config['cars']['items'][i]['controlKeys'][key] + '</li>';
-          }          
-          result = result + '</ul>';
-        }
-        return result;
-      };
-
       this.template = template('controls');
-      this.render(getData());
+      this.render({ data: config['cars']['items'] });
     },
 
     //Показываем результаты заездов
@@ -108,21 +93,8 @@ function getMainView() {
           'results', 
           [],
           function(data, scope) {
-            var result = '<table><tr><th>№</th><th>Car</th><th>Time (s)</th><th>Сhronology</th></tr>';
-
-            for(var i = 0, n = data.rows.length; i < n; i++) {
-              result = result + 
-                '<tr>' +
-                  '<td>' + (i + 1) + '</td>' + 
-                  '<td>' + data.rows.item(i)['name'] + '</td>' + 
-                  '<td>' + data.rows.item(i)['result'] + '</td>' + 
-                  '<td>' + data.rows.item(i)['date_time'] + '<td>' +
-                '</tr>';
-            }
-            result = result + '</table>';
-            
             scope.template = template('results');
-            scope.render(result);
+            scope.render({ 'data': data.rows });
           },
           this
         );

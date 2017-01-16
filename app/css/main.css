@@ -67,7 +67,10 @@ h1 {
   font-color: red; }
   .info table {
     width: 100%;
-    border: 1px; }
+    border: 1px;
+    text-align: center; }
+    .info table th {
+      text-align: center; }
 
 #btn-back {
   z-index: 300;

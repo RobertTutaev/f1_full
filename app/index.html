@@ -43,7 +43,24 @@
     <script id="controls" type="text/template">
         <div class="main-menu">
             <h2>Show Controls</h2>
-            <div class="info"><%= data %></div><br>
+            <div class="info">
+                <table>
+                    <% for (var i = 0, n = data.length; i < n; i++) { %>
+                        <tr>
+                            <th>Car Name:</th>
+                            <th><%= data[i]['name'] %></th>
+                        </tr>                        
+                        <% for (key in data[i]['controlKeys']) { %>
+                        <tr>
+                            <td>"<b><%= String.fromCharCode(key) %></b>"</td>
+                            <td><%= data[i]['controlKeys'][key] %></li></td>
+                        </tr>
+                        <% } %>
+                        </tr>
+                    <% } %>
+                </table>
+            
+            </div><br>
 
             <button class="btn btn-info" type="button" id="btn-back2">Back</button>
         </div>
@@ -52,7 +69,26 @@
     <script id="results" type="text/template">
         <div class="main-menu">
             <h2>Best Results</h2>
-            <div class="info"><%= data %></div><br>
+            <div class="info">
+                <table>
+                    <tr>
+                        <th>№</th>
+                        <th>Car</th>
+                        <th>Time (s)</th>
+                        <th>Сhronology</th>
+                    </tr>
+
+                    <% for(var i = 0, n = data.length; i < n; i++) { %>
+                        <tr>
+                            <td><%= (i + 1) %></td>
+                            <td><%= data.item(i)['name'] %></td>
+                            <td><%= data.item(i)['result'] %></td>
+                            <td><%= data.item(i)['date_time'] %><td>
+                        </tr>
+                    <% } %>
+                
+                </table>
+            </div><br>
 
             <button class="btn btn-info" type="button" id="btn-back3">Back</button>
         </div>
