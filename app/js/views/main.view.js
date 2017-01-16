@@ -4,8 +4,9 @@ function getMainView() {
     
     el: '#main-control',
     db: {},
+    changeEl: null,
     collection: {},
-    template: template('main'),    
+    template: template('main'),
 
     events: {
       'click #btn-play'     : 'play',
@@ -14,16 +15,18 @@ function getMainView() {
       'click #btn-back2'    : 'back2',
       'click #btn-back3'    : 'back2',
       'click #btn-controls' : 'controls',
-      'click #btn-results'  : 'results'
+      'click #btn-results'  : 'results',
+      'click .btn-xs'       : 'change'
     },
 
-    initialize: function() {      
+    initialize: function() {
       this.collection = new СarsCollection();
       this.scene = new MainScene(this.collection);
+
       try {
         this.db = new DB();
       } catch (err) {
-        console.log("DB Error: " + err.message);
+        console.log('DB Error: ' + err.message);
       }
 
       _.bindAll(this, 'on_keydown');
@@ -46,20 +49,18 @@ function getMainView() {
       this.collection.setCarsInRace(1);
       this.scene.beginRace(function(scope){
           scope.$el.find('#btn-back').css({'visibility': 'visible'});      
-        },
-        this);
+        }, this);
     },
 
     //Запуск игры (2 игрока)
     play2: function() {
       this.$el.find('#main-menu').css({'animation': 'scale_main_control0 1s forwards'});
-      this.$el.find('#btn-play').trigger('blur');
+      this.$el.find('#btn-play2').trigger('blur');
 
       this.collection.setCarsInRace(2);
       this.scene.beginRace(function(scope){
           scope.$el.find('#btn-back').css({'visibility': 'visible'});      
-        }, 
-        this);
+        }, this);
     },
 
     //Прерывание игры
@@ -83,6 +84,50 @@ function getMainView() {
       this.render({ data: config['cars']['items'] });
     },
 
+    //Включаем/выключаем РЕЖИМ изменения управления машиной
+    change: function(e) {
+      var newChangeEl = $(e.currentTarget);
+      newChangeEl.trigger('blur');
+
+      if ( this.changeEl ) {
+        if ( this.changeEl.attr('id') === newChangeEl.attr('id') ) {
+          this.сhange_on(false);
+          this.changeEl = null;
+        } else {
+          this.сhange_on(false);
+          this.changeEl = newChangeEl;
+          this.сhange_on(true);
+        }
+      } else {
+        this.changeEl = newChangeEl;
+        this.сhange_on(true);
+      }
+    },
+
+    //Включаем/выключаем КНОПКУ изменения управления машиной
+    сhange_on: function(on) {
+      this.changeEl.removeClass('btn-default btn-warning');
+
+      if ( on ) {
+        this.changeEl.text('Cancel');
+        this.changeEl.addClass('btn-warning');
+      } else {
+        this.changeEl.text('Change');
+        this.changeEl.addClass('btn-default');
+      }
+    },
+
+    //Изменяем кнопку управления машиной
+    change_key: function(code) {
+      var id = this.changeEl.attr('id');
+      var pos = id.indexOf('_');
+      var i = id.substring(1, pos);
+      var key = id.substring(pos+1);
+      
+      config['cars']['items'][i]['controlKeys'][key] = code;                  //меняем config
+      $( '#k' + i + '_' + key ).html( '"' + String.fromCharCode(code) + '"' );//обновляем новую кнопку
+    },
+
     //Показываем результаты заездов
     results: function() {
 
@@ -90,27 +135,32 @@ function getMainView() {
       try {
         
         this.db.selectValues(
-          'results', 
+          'results',
           [],
-          function(data, scope) {
+          function(d, scope) {
             scope.template = template('results');
-            scope.render({ 'data': data.rows });
-          },
-          this
-        );
+            scope.render({ data: d.rows });
+          }, this);
 
       } catch (err) {
-        console.log("DB Error: " + err.message);
+        console.log('DB Error: ' + err.message);
       }
     },
     
-    //Обработка нажатия клавиш управления машиной
+    //Обработка нажатия клавиш
     on_keydown: function(e) {
       var cars = this.collection.carsInRace();
-      
-      cars.each(function(car){
-        car.controlCar(e.keyCode || e.charCode);
-      });
+      var code = e.keyCode || e.charCode;
+
+      if ( this.changeEl ) {
+        this.change_key(code);
+        this.сhange_on(false);
+        this.changeEl = null;
+      } else {
+        cars.each(function(car){
+          car.controlCar(code);
+        });
+      }
     },
 
     //Слушаем завершение гонок
@@ -119,7 +169,7 @@ function getMainView() {
         try {
           this.db.insertValues('results', [car.get('name'), ( car.get('endTime') - car.get('beginTime') ) / 1000]);
         } catch (err) {
-          console.log("DB Error: " + err.message);
+          console.log('DB Error: ' + err.message);
         }        
       }
     }

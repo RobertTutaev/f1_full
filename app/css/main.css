@@ -47,7 +47,7 @@ h1 {
 .main-menu {
   z-index: 200;
   position: absolute;
-  top: 350px;
+  top: 340px;
   left: 50%;
   width: 310px;
   margin-top: -100px;
@@ -57,8 +57,8 @@ h1 {
   border-radius: 5px; }
   .main-menu h2 {
     text-align: center; }
-  .main-menu .btn {
-    font-size: 200%;
+  .main-menu .btn-big {
+    font-size: 210%;
     width: 300px;
     margin: 5px; }
 
@@ -71,6 +71,9 @@ h1 {
     text-align: center; }
     .info table th {
       text-align: center; }
+
+.btn-xs {
+  font-size: 80%; }
 
 #btn-back {
   z-index: 300;

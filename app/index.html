@@ -31,10 +31,10 @@
 
     <script id="main" type="text/template">
         <div class="main-menu" id="main-menu">
-            <button class="btn btn-info" type="button" id="btn-play">Play (one player)</button><br>
-            <button class="btn btn-info" type="button" id="btn-play2">Play (two players)</button><br>
-            <button class="btn btn-warning" type="button" id="btn-controls">Show Controls</button><br>
-            <button class="btn btn-warning" type="button" id="btn-results">Best Results</button><br>
+            <button class="btn btn-info btn-big" type="button" id="btn-play">Play (one player)</button><br>
+            <button class="btn btn-info btn-big" type="button" id="btn-play2">Play (two players)</button><br>
+            <button class="btn btn-warning btn-big" type="button" id="btn-controls">Controls</button><br>
+            <button class="btn btn-warning btn-big" type="button" id="btn-results">Best Results</button><br>
         </div>
 
         <button class="btn btn-info" type="button" id="btn-back">Back</button>
@@ -42,18 +42,20 @@
 
     <script id="controls" type="text/template">
         <div class="main-menu">
-            <h2>Show Controls</h2>
+            <h2>Controls</h2>
             <div class="info">
                 <table>
                     <% for (var i = 0, n = data.length; i < n; i++) { %>
                         <tr>
                             <th>Car:</th>
                             <th><%= data[i]['name'] %></th>
-                        </tr>                        
+                            <th></th>
+                        </tr>
                         <% for (key in data[i]['controlKeys']) { %>
                         <tr>
-                            <th><%= String.fromCharCode(key) %></th>
-                            <td><%= data[i]['controlKeys'][key] %></td>
+                            <th id="k<%= i %>_<%= key %>">"<%= String.fromCharCode(data[i]['controlKeys'][key]) %>"</th>
+                            <td><%= key %></td>
+                            <td><button id="b<%= i %>_<%= key %>" class="btn btn-default btn-xs">Change</button></td>
                         </tr>
                         <% } %>
                     <% } %>
@@ -61,7 +63,7 @@
             
             </div><br>
 
-            <button class="btn btn-info" type="button" id="btn-back2">Back</button>
+            <button class="btn btn-info btn-big" type="button" id="btn-back2">Back</button>
         </div>
     </script>
 
@@ -89,7 +91,7 @@
                 </table>
             </div><br>
 
-            <button class="btn btn-info" type="button" id="btn-back3">Back</button>
+            <button class="btn btn-info btn-big" type="button" id="btn-back3">Back</button>
         </div>
     </script>
 

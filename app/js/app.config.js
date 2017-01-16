@@ -71,11 +71,11 @@ function getConfig(){
                     beginY: 617,
                     beginRotation: -3.14,
                     controlKeys: {
-                        87 : 'up',
-                        83 : 'down',
-                        90 : 'stop',
-                        65 : 'left',
-                        68 : 'right'
+                        up  : 87,
+                        down: 83,
+                        stop: 90,
+                        left: 65,
+                        right: 68
                     }
                 },
 
@@ -89,11 +89,11 @@ function getConfig(){
                     beginY: 662,
                     beginRotation: -3.14,
                     controlKeys: {
-                        73 : 'up',
-                        75 : 'down',
-                        77 : 'stop',
-                        74 : 'left', 
-                        76 : 'right'
+                        up  : 73,
+                        down: 75,
+                        stop: 77,
+                        left: 74, 
+                        right: 76
                     }
                 }
             ],

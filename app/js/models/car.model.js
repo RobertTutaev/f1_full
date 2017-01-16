@@ -18,11 +18,11 @@ var Car = Backbone.Model.extend({
     endTime: 0,
     checkPointNumber: 0,
     controlKeys: {
-      'w' : 'up', 
-      's' : 'down',
-      'z' : 'stop',
-      'a' : 'left', 
-      'd' : 'right'
+      up  : 87,
+      down: 83,
+      stop: 90,
+      left: 65,
+      right: 68
     }
   },
 
@@ -32,6 +32,18 @@ var Car = Backbone.Model.extend({
     }
   },
 
+  //В целях оптимизации производительности меняем порядок ключей и значений в свойстве "controlKeys"
+  initialize: function() {
+    var c = this.get('controlKeys');
+    var k = [];
+
+    for(var key in c) {
+      k[ c[key] ] = key;
+    }
+
+    this.set({'controlKeys': k});
+  },
+ 
   controlCar: function(char) {
     switch (this.get('controlKeys')[char]) {
       case 'up':
@@ -90,5 +102,4 @@ var Car = Backbone.Model.extend({
     this.set({'rotation': this.get('rotation') + 0.2 * Math.sign( this.get('speed') + 0.0001 )});
     this.calculateSpeedXY();
   }
-
 });
