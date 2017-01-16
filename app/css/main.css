@@ -57,7 +57,7 @@ h1 {
   border-radius: 5px; }
   .main-menu h2 {
     text-align: center; }
-  .main-menu button {
+  .main-menu .btn {
     font-size: 200%;
     width: 300px;
     margin: 5px; }

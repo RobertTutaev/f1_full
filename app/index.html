@@ -47,16 +47,15 @@
                 <table>
                     <% for (var i = 0, n = data.length; i < n; i++) { %>
                         <tr>
-                            <th>Car Name:</th>
+                            <th>Car:</th>
                             <th><%= data[i]['name'] %></th>
                         </tr>                        
                         <% for (key in data[i]['controlKeys']) { %>
                         <tr>
-                            <td>"<b><%= String.fromCharCode(key) %></b>"</td>
-                            <td><%= data[i]['controlKeys'][key] %></li></td>
+                            <th><%= String.fromCharCode(key) %></th>
+                            <td><%= data[i]['controlKeys'][key] %></td>
                         </tr>
                         <% } %>
-                        </tr>
                     <% } %>
                 </table>
             
