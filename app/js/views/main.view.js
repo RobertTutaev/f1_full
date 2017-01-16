@@ -40,33 +40,33 @@ function getMainView() {
 
     //Запуск игры (1 игрок)
     play: function() {
-      $(this.$el).find('#main-menu').css({'animation': 'scale_main_control0 1s forwards'});
-      $(this.$el).find('#btn-play').trigger('blur');
+      this.$el.find('#main-menu').css({'animation': 'scale_main_control0 1s forwards'});
+      this.$el.find('#btn-play').trigger('blur');
 
       this.collection.setCarsInRace(1);
       this.scene.beginRace(function(scope){
-          $(scope.$el).find('#btn-back').css({'visibility': 'visible'});      
+          scope.$el.find('#btn-back').css({'visibility': 'visible'});      
         },
         this);
     },
 
     //Запуск игры (2 игрока)
     play2: function() {
-      $(this.$el).find('#main-menu').css({'animation': 'scale_main_control0 1s forwards'});
-      $(this.$el).find('#btn-play').trigger('blur');
+      this.$el.find('#main-menu').css({'animation': 'scale_main_control0 1s forwards'});
+      this.$el.find('#btn-play').trigger('blur');
 
       this.collection.setCarsInRace(2);
       this.scene.beginRace(function(scope){
-          $(scope.$el).find('#btn-back').css({'visibility': 'visible'});      
+          scope.$el.find('#btn-back').css({'visibility': 'visible'});      
         }, 
         this);
     },
 
     //Прерывание игры
     back: function() {
-      $(this.$el).find('#main-menu').css({'animation': 'scale_main_control1 1s forwards'});
-      $(this.$el).find('#btn-back').css({'visibility': 'hidden'});
-      $(this.$el).find('#btn-play').trigger('focus');
+      this.$el.find('#main-menu').css({'animation': 'scale_main_control1 1s forwards'});
+      this.$el.find('#btn-back').css({'visibility': 'hidden'});
+      this.$el.find('#btn-play').trigger('focus');
 
       this.scene.breakRace();
     },
