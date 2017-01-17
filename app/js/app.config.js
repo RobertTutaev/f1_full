@@ -3,8 +3,6 @@ function getConfig(){
     return {
         //Id елемента для отрисовки
         canvasEl: '#main-canvas',
-        //Id невидимого елемента для анализа съезда машин с дороги
-        canvasAnalysisEl: '#analysis-canvas',
         //Общая ширина сцены
         canvasWidth: 1016,
         //Общая высота сцены
