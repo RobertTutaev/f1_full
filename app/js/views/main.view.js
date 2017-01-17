@@ -16,7 +16,7 @@ function getMainView() {
       'click #btn-back3'    : 'back2',
       'click #btn-controls' : 'controls',
       'click #btn-results'  : 'results',
-      'click .btn-xs'       : 'change'
+      'click .btn-f1'       : 'change'
     },
 
     initialize: function() {
@@ -124,7 +124,7 @@ function getMainView() {
       var i = id.substring(1, pos);
       var key = id.substring(pos+1);
       
-      config['cars']['items'][i]['controlKeys'][key] = code;                  //меняем config
+      config['cars']['items'][i]['controlKeys'][key] = code;                  //изменяем config
       $( '#k' + i + '_' + key ).html( '"' + String.fromCharCode(code) + '"' );//обновляем новую кнопку
     },
 

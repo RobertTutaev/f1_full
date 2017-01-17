@@ -48,19 +48,18 @@
                     <% for (var i = 0, n = data.length; i < n; i++) { %>
                         <tr>
                             <th>Car:</th>
-                            <th><%= data[i]['name'] %></th>
+                            <th style="color: DarkGreen;" id="n<%= i %>"><%= data[i]['name'] %></th>
                             <th></th>
                         </tr>
                         <% for (key in data[i]['controlKeys']) { %>
                         <tr>
-                            <th id="k<%= i %>_<%= key %>">"<%= String.fromCharCode(data[i]['controlKeys'][key]) %>"</th>
                             <td><%= key %></td>
-                            <td><button id="b<%= i %>_<%= key %>" class="btn btn-default btn-xs">Change</button></td>
+                            <th id="k<%= i %>_<%= key %>">"<%= String.fromCharCode(data[i]['controlKeys'][key]) %>"</th>
+                            <td><button id="b<%= i %>_<%= key %>" class="btn btn-default btn-xs btn-f1">Change</button></td>
                         </tr>
                         <% } %>
                     <% } %>
                 </table>
-            
             </div><br>
 
             <button class="btn btn-info btn-big" type="button" id="btn-back2">Back</button>
@@ -86,8 +85,7 @@
                             <td><%= data.item(i)['result'] %></td>
                             <td><%= data.item(i)['date_time'] %><td>
                         </tr>
-                    <% } %>
-                
+                    <% } %>                
                 </table>
             </div><br>
 
